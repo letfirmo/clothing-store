@@ -41,4 +41,5 @@ yarn-error.log*
 next-env.d.ts
 
 # local env file (can opt-in for committing if needed)
-.local.env
+.env.local
+
