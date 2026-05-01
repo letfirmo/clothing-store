@@ -2,145 +2,19 @@
 
 import { ProductCard, Product } from "@/src/components/molecules/ProductCard/ProductCard"
 
-// Sample products data
-const products: Product[] = [
-  {
-    id: "1",
-    name: "Camiseta Básica Algodão Premium",
-    price: 79.90,
-    originalPrice: 99.90,
-    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=533&fit=crop",
-    hoverImage: "https://images.unsplash.com/photo-1622445275576-721325763afe?w=400&h=533&fit=crop",
-    category: "Camisetas",
-    isSale: true,
-    colors: ["#ffffff", "#000000", "#1e3a5f", "#8b4513"],
-    sizes: ["P", "M", "G", "GG"],
-  },
-  {
-    id: "2",
-    name: "Vestido Midi Floral Primavera",
-    price: 189.90,
-    image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=533&fit=crop",
-    hoverImage: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=400&h=533&fit=crop",
-    category: "Vestidos",
-    isNew: true,
-    colors: ["#f5f5dc", "#ffc0cb"],
-    sizes: ["PP", "P", "M", "G"],
-  },
-  {
-    id: "3",
-    name: "Calça Jeans Skinny High Waist",
-    price: 159.90,
-    originalPrice: 199.90,
-    image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400&h=533&fit=crop",
-    hoverImage: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=400&h=533&fit=crop",
-    category: "Calças",
-    isSale: true,
-    colors: ["#1e3a5f", "#000000", "#87ceeb"],
-    sizes: ["36", "38", "40", "42", "44"],
-  },
-  {
-    id: "4",
-    name: "Blazer Oversized Elegance",
-    price: 299.90,
-    image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400&h=533&fit=crop",
-    hoverImage: "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400&h=533&fit=crop",
-    category: "Jaquetas",
-    isNew: true,
-    colors: ["#000000", "#f5f5dc", "#808080"],
-    sizes: ["P", "M", "G"],
-  },
-  {
-    id: "5",
-    name: "Blusa Cropped Tricot",
-    price: 129.90,
-    image: "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=400&h=533&fit=crop",
-    hoverImage: "https://images.unsplash.com/photo-1485462537746-965f33f7f6a7?w=400&h=533&fit=crop",
-    category: "Blusas",
-    colors: ["#ffc0cb", "#ffffff", "#f5f5dc"],
-    sizes: ["PP", "P", "M"],
-  },
-  {
-    id: "6",
-    name: "Saia Midi Plissada",
-    price: 149.90,
-    originalPrice: 179.90,
-    image: "https://images.unsplash.com/photo-1583496661160-fb5886a0uj2a?w=400&h=533&fit=crop",
-    hoverImage: "https://images.unsplash.com/photo-1592301933927-35b597393c0a?w=400&h=533&fit=crop",
-    category: "Saias",
-    isSale: true,
-    colors: ["#000000", "#f5f5dc", "#ffc0cb"],
-    sizes: ["P", "M", "G", "GG"],
-  },
-  {
-    id: "7",
-    name: "Moletom Comfort Hoodie",
-    price: 199.90,
-    image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=533&fit=crop",
-    hoverImage: "https://images.unsplash.com/photo-1578681994506-b8f463449011?w=400&h=533&fit=crop",
-    category: "Moletons",
-    isNew: true,
-    colors: ["#808080", "#000000", "#1e3a5f"],
-    sizes: ["P", "M", "G", "GG", "XG"],
-  },
-  {
-    id: "8",
-    name: "Shorts Jeans Vintage",
-    price: 89.90,
-    originalPrice: 119.90,
-    image: "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=400&h=533&fit=crop",
-    hoverImage: "https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=400&h=533&fit=crop",
-    category: "Shorts",
-    isSale: true,
-    colors: ["#87ceeb", "#1e3a5f"],
-    sizes: ["36", "38", "40", "42"],
-  },
-  {
-    id: "9",
-    name: "Cardigan Oversize Knit",
-    price: 219.90,
-    image: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=400&h=533&fit=crop",
-    hoverImage: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400&h=533&fit=crop",
-    category: "Blusas",
-    colors: ["#f5f5dc", "#ffc0cb", "#808080"],
-    sizes: ["P", "M", "G"],
-  },
-  {
-    id: "10",
-    name: "Calça Wide Leg Alfaiataria",
-    price: 179.90,
-    image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=533&fit=crop",
-    hoverImage: "https://images.unsplash.com/photo-1509551388413-e18d0ac5d495?w=400&h=533&fit=crop",
-    category: "Calças",
-    isNew: true,
-    colors: ["#000000", "#f5f5dc", "#8b4513"],
-    sizes: ["36", "38", "40", "42", "44"],
-  },
-  {
-    id: "11",
-    name: "Top Cropped Ribana",
-    price: 59.90,
-    originalPrice: 79.90,
-    image: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=400&h=533&fit=crop",
-    hoverImage: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=400&h=533&fit=crop",
-    category: "Tops",
-    isSale: true,
-    colors: ["#ffffff", "#000000", "#ffc0cb"],
-    sizes: ["PP", "P", "M"],
-  },
-  {
-    id: "12",
-    name: "Jaqueta Jeans Oversized",
-    price: 249.90,
-    image: "https://images.unsplash.com/photo-1548126032-079a0fb0099d?w=400&h=533&fit=crop",
-    hoverImage: "https://images.unsplash.com/photo-1551537482-f2075a1d41f2?w=400&h=533&fit=crop",
-    category: "Jaquetas",
-    colors: ["#1e3a5f", "#87ceeb"],
-    sizes: ["P", "M", "G", "GG"],
-  },
-]
+interface ProductGridProps {
+  products: Product[]
+}
 
-export function ProductGrid() {
+export function ProductGrid({ products }: ProductGridProps) {
+  if (products.length === 0) {
+    return (
+      <div className="flex min-h-[320px] items-center justify-center rounded-xl border border-dashed border-border bg-muted/20 px-6 text-center text-sm text-muted-foreground">
+        Nenhum produto encontrado no momento.
+      </div>
+    )
+  }
+
   return (
     <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-3 xl:grid-cols-3">
       {products.map((product) => (

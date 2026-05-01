@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import Image from "next/image"
 import { Heart, ShoppingBag, Eye } from "lucide-react"
 import { Button } from "@/src/components/atoms/button/button"
@@ -14,7 +15,7 @@ export interface Product {
   originalPrice?: number
   image: string
   hoverImage?: string
-  category: string
+  category?: string
   isNew?: boolean
   isSale?: boolean
   colors?: string[]
@@ -28,6 +29,7 @@ interface ProductCardProps {
 export function ProductCard({ product }: ProductCardProps) {
   const [isHovered, setIsHovered] = useState(false)
   const [isFavorite, setIsFavorite] = useState(false)
+  const productHref = `/product/${product.id}`
 
   const discount = product.originalPrice
     ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
@@ -40,17 +42,28 @@ export function ProductCard({ product }: ProductCardProps) {
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Image Container */}
-      <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-muted">
-        <Image
-          src={product.image}
-          alt={product.name}
-          fill
-          className={cn(
-            "object-cover transition-all duration-500",
-            isHovered && product.hoverImage ? "opacity-0" : "opacity-100"
-          )}
+      <div className="relative aspect-3/4 overflow-hidden rounded-lg bg-muted">
+        <Link
+          href={productHref}
+          aria-label={`Ver detalhes de ${product.name}`}
+          className="absolute inset-0 z-10"
         />
-        {product.hoverImage && (
+        {product.image ? (
+          <Image
+            src={product.image}
+            alt={product.name}
+            fill
+            className={cn(
+              "object-cover transition-all duration-500",
+              isHovered && product.hoverImage ? "opacity-0" : "opacity-100"
+            )}
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center bg-linear-to-br from-muted via-background to-muted text-xs uppercase tracking-[0.3em] text-muted-foreground">
+            Sem imagem
+          </div>
+        )}
+        {product.hoverImage && product.image && (
           <Image
             src={product.hoverImage}
             alt={product.name}
@@ -63,7 +76,7 @@ export function ProductCard({ product }: ProductCardProps) {
         )}
 
         {/* Badges */}
-        <div className="absolute left-3 top-3 flex flex-col gap-1">
+        <div className="absolute left-3 top-3 z-20 flex flex-col gap-1">
           {product.isNew && (
             <Badge className="bg-primary text-primary-foreground">Novo</Badge>
           )}
@@ -77,7 +90,7 @@ export function ProductCard({ product }: ProductCardProps) {
           variant="ghost"
           size="icon"
           className={cn(
-            "absolute right-3 top-3 h-9 w-9 rounded-full bg-background/80 backdrop-blur-sm transition-all hover:bg-background",
+            "absolute right-3 top-3 z-20 h-9 w-9 rounded-full bg-background/80 backdrop-blur-sm transition-all hover:bg-background",
             isFavorite && "text-red-500"
           )}
           onClick={() => setIsFavorite(!isFavorite)}
@@ -88,7 +101,7 @@ export function ProductCard({ product }: ProductCardProps) {
         {/* Quick Actions */}
         <div
           className={cn(
-            "absolute bottom-0 left-0 right-0 flex items-center justify-center gap-2 bg-background/90 p-3 backdrop-blur-sm transition-all duration-300",
+            "absolute bottom-0 left-0 right-0 z-20 flex items-center justify-center gap-2 bg-background/90 p-3 backdrop-blur-sm transition-all duration-300",
             isHovered ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
           )}
         >
@@ -96,17 +109,21 @@ export function ProductCard({ product }: ProductCardProps) {
             <ShoppingBag className="h-4 w-4" />
             Adicionar
           </Button>
-          <Button variant="outline" size="icon" className="h-9 w-9">
-            <Eye className="h-4 w-4" />
+          <Button asChild variant="outline" size="icon" className="h-9 w-9">
+            <Link href={productHref} aria-label={`Abrir detalhes de ${product.name}`}>
+              <Eye className="h-4 w-4" />
+            </Link>
           </Button>
         </div>
       </div>
 
       {/* Product Info */}
       <div className="mt-4 space-y-1">
-        <p className="text-xs text-muted-foreground uppercase tracking-wide">
-          {product.category}
-        </p>
+        {product.category && (
+          <p className="text-xs text-muted-foreground uppercase tracking-wide">
+            {product.category}
+          </p>
+        )}
         <h3 className="text-sm font-medium text-foreground line-clamp-2 text-balance">
           {product.name}
         </h3>
