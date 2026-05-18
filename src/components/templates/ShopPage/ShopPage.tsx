@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { X } from "lucide-react"
 import { Button } from "@/src/components/atoms/button/button"
 import { HeroSection } from "@/src/components/organisms/HeroSection/HeroSection"
@@ -23,9 +24,9 @@ export function ShopPage({ products }: ShopPageProps) {
 
       <div className="border-b border-border bg-background px-4 py-3 lg:px-8">
         <nav className="mx-auto flex max-w-7xl items-center gap-2 text-sm text-muted-foreground">
-          <a href="/" className="hover:text-foreground">
+          <Link href="/" className="hover:text-foreground">
             Início
-          </a>
+          </Link>
           <span>/</span>
           <span className="text-foreground">Todos os Produtos</span>
         </nav>

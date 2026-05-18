@@ -1,11 +1,12 @@
 import Image from "next/image"
+import Link from "next/link"
 import { notFound } from "next/navigation"
 import { supabase } from "@/src/lib/supabase"
 import { ProductSchema } from "@/src/lib/schemas"
 import { Button } from "@/src/components/atoms/button/button"
 
 interface ProductPageProps {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
 function formatPrice(value: number) {
@@ -16,10 +17,12 @@ function formatPrice(value: number) {
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
+  const { id } = await params
+
   const { data } = await supabase
     .from("products")
     .select("id,name,price,image_url,product_variants(size,stock_quantity,color)")
-    .eq("id", params.id)
+    .eq("id", id)
     .maybeSingle()
 
   if (!data) {
@@ -88,8 +91,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <Button size="lg" className="flex-1">
               Adicionar ao Carrinho
             </Button>
-            <Button variant="outline" size="lg" className="flex-1">
-              Voltar para a loja
+            <Button asChild variant="outline" size="lg" className="flex-1">
+              <Link href="/">Voltar para a loja</Link>
             </Button>
           </div>
         </section>
