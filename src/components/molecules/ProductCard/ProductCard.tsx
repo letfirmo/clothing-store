@@ -43,37 +43,34 @@ export function ProductCard({ product }: ProductCardProps) {
     >
       {/* Image Container */}
       <div className="relative aspect-3/4 overflow-hidden rounded-lg bg-muted">
-        <Link
-          href={productHref}
-          aria-label={`Ver detalhes de ${product.name}`}
-          className="absolute inset-0 z-10"
-        />
-        {product.image ? (
-          <Image
-            src={product.image}
-            alt={product.name}
-            fill
-            className={cn(
-              "object-cover transition-all duration-500",
-              isHovered && product.hoverImage ? "opacity-0" : "opacity-100"
-            )}
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center bg-linear-to-br from-muted via-background to-muted text-xs uppercase tracking-[0.3em] text-muted-foreground">
-            Sem imagem
-          </div>
-        )}
-        {product.hoverImage && product.image && (
-          <Image
-            src={product.hoverImage}
-            alt={product.name}
-            fill
-            className={cn(
-              "object-cover transition-all duration-500",
-              isHovered ? "opacity-100" : "opacity-0"
-            )}
-          />
-        )}
+        <Link href={productHref} aria-label={`Ver detalhes de ${product.name}`}>
+          {product.image ? (
+            <Image
+              src={product.image}
+              alt={product.name}
+              fill
+              className={cn(
+                "object-cover transition-all duration-500",
+                isHovered && product.hoverImage ? "opacity-0" : "opacity-100"
+              )}
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center bg-linear-to-br from-muted via-background to-muted text-xs uppercase tracking-[0.3em] text-muted-foreground">
+              Sem imagem
+            </div>
+          )}
+          {product.hoverImage && product.image && (
+            <Image
+              src={product.hoverImage}
+              alt={product.name}
+              fill
+              className={cn(
+                "object-cover transition-all duration-500",
+                isHovered ? "opacity-100" : "opacity-0"
+              )}
+            />
+          )}
+        </Link>
 
         {/* Badges */}
         <div className="absolute left-3 top-3 z-20 flex flex-col gap-1">
